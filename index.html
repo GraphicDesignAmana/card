@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>صانع بطاقات التخرج</title>
+    <title>صانع بطاقات التخرج المخصصة</title>
     <!-- تضمين مكتبة Tailwind CSS للتنسيق العصري -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style>
@@ -23,21 +23,14 @@
 
     <div class="w-full max-w-6xl flex flex-col md:flex-row gap-8 items-center justify-center">
         
-        <!-- القسم الأيسر: معاينة بطاقة التخرج العمودية -->
+        <!-- القسم الأيسر: معاينة بطاقة التخرج العمودية بالصورة الخاصة بك -->
         <div class="w-full md:w-1/2 flex flex-col items-center">
             <div class="preview-card p-4 w-full max-w-[380px] border border-white/40">
                 <!-- حاوية الرسم (Canvas/SVG) بأبعاد عمودية متناسقة 600×1000 -->
-                <div id="card-container" class="relative w-full rounded-xl overflow-hidden shadow-xl border border-gray-800 bg-slate-900">
-                    <svg id="card-svg" viewBox="0 0 600 1000" class="w-full h-auto block">
+                <div id="card-container" class="relative w-full rounded-xl overflow-hidden shadow-xl border border-gray-200 bg-slate-100">
+                    <svg id="card-svg" viewBox="0 0 600 1000" class="w-full h-auto block" xmlns="http://www.w3.org/2000/svg">
                         <defs>
-                            <!-- التدرج الخلفي الرمادي الداكن المعتمد في البطاقة الأصلية -->
-                            <linearGradient id="bg-grad" x1="0%" y1="0%" x2="0%" y2="100%">
-                                <stop offset="0%" style="stop-color:#3a4847;stop-opacity:1" />
-                                <stop offset="50%" style="stop-color:#4a5958;stop-opacity:1" />
-                                <stop offset="100%" style="stop-color:#1e2726;stop-opacity:1" />
-                            </linearGradient>
-                            
-                            <!-- التدرج الذهبي الساطع للنصوص والتفاصيل -->
+                            <!-- التدرج الذهبي الساطع للاسم لتطابق الألوان -->
                             <linearGradient id="gold-text" x1="0%" y1="0%" x2="100%" y2="0%">
                                 <stop offset="0%" style="stop-color:#ffe8b3;stop-opacity:1" />
                                 <stop offset="50%" style="stop-color:#dcb36c;stop-opacity:1" />
@@ -45,74 +38,28 @@
                             </linearGradient>
                         </defs>
                         
-                        <!-- الخلفية -->
-                        <rect width="600" height="1000" fill="url(#bg-grad)" />
+                        <!-- جلب صورتك الخاصة لتكون هي الخلفية بالكامل بنفس الأبعاد الطولية -->
+                        <!-- استبدل رابط الصورة بالرابط الخاص بك مع الحفاظ على الأقواس وعلامات التنصيص -->
+                        <image href="https://i.ibb.co/35frnkct/jpg.jpg" width="600" height="1000" x="0" y="0" preserveAspectRatio="xMidYMid slice" crossorigin="anonymous"/>
                         
-                        <!-- إضاءة ناعمة في المنتصف خلف القبعات -->
-                        <radialGradient id="glow" cx="50%" cy="45%" r="40%">
-                            <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.15" />
-                            <stop offset="100%" style="stop-color:#ffffff;stop-opacity:0" />
-                        </radialGradient>
-                        <circle cx="300" cy="450" r="300" fill="url(#glow)" />
-                        
-                        <!-- نصوص التهنئة العلوية بالذهبي الساطع العريض -->
-                        <text x="300" y="150" text-anchor="middle" fill="url(#gold-text)" font-size="75" font-weight="900" letter-spacing="2">مبروك</text>
-                        <text x="300" y="250" text-anchor="middle" fill="url(#gold-text)" font-size="75" font-weight="900" letter-spacing="2">التخرج</text>
-                        
-                        <!-- عناصر تعبيرية: قبعات التخرج الرقمية المصممة هندسياً -->
-                        <!-- القبعة العلوية اليسرى -->
-                        <g transform="translate(180, 360) rotate(-15) scale(0.7)">
-                            <polygon points="100,20 190,55 100,90 10,55" fill="#151918" stroke="#333" stroke-width="2"/>
-                            <path d="M40,68 L40,110 Q100,130 160,110 L160,68" fill="#151918"/>
-                            <path d="M100,55 L170,100 L170,160" fill="none" stroke="url(#gold-text)" stroke-width="3"/>
-                            <circle cx="170" cy="165" r="6" fill="url(#gold-text)"/>
-                        </g>
-                        
-                        <!-- القبعة العلوية اليمنى -->
-                        <g transform="translate(320, 370) rotate(15) scale(0.7)">
-                            <polygon points="100,20 190,55 100,90 10,55" fill="#151918" stroke="#333" stroke-width="2"/>
-                            <path d="M40,68 L40,110 Q100,130 160,110 L160,68" fill="#151918"/>
-                            <path d="M100,55 L30,95 L30,150" fill="none" stroke="url(#gold-text)" stroke-width="3"/>
-                            <circle cx="30" cy="155" r="6" fill="url(#gold-text)"/>
-                        </g>
-
-                        <!-- القبعة السفلية الكبيرة الرئيسية -->
-                        <g transform="translate(190, 480) rotate(-5) scale(1.1)">
-                            <polygon points="100,20 190,55 100,90 10,55" fill="#111" stroke="#222" stroke-width="2"/>
-                            <path d="M44,70 L44,105 Q100,125 156,105 L156,70" fill="#111"/>
-                            <path d="M100,55 L25,95 L25,160" fill="none" stroke="url(#gold-text)" stroke-width="3"/>
-                            <rect x="20" y="160" width="10" height="25" fill="url(#gold-text)" rx="2"/>
-                        </g>
-                        
-                        <!-- قصاصات ورق ذهبية متطايرة (Confetti) -->
-                        <path d="M 80,260 Q 90,250 110,270" fill="none" stroke="url(#gold-text)" stroke-width="6" stroke-linecap="round"/>
-                        <path d="M 500,400 Q 520,390 510,420" fill="none" stroke="url(#gold-text)" stroke-width="6" stroke-linecap="round"/>
-                        <path d="M 100,520 Q 80,540 100,550" fill="none" stroke="url(#gold-text)" stroke-width="5" stroke-linecap="round"/>
-                        <path d="M 480,200 Q 460,190 470,210" fill="none" stroke="url(#gold-text)" stroke-width="4" stroke-linecap="round"/>
-
-                        <!-- مساحة ديناميكية متناغمة ومخصصة لاسم الخريج لمنع تداخله مع اللون الأسود -->
+                        <!-- مساحة ديناميكية متناغمة ومخصصة لاسم الخريج (يمكنك تعديل قيم Y بالأسفل لرفع أو خفض الاسم) -->
                         <text id="svg-name-target" x="300" y="730" text-anchor="middle" fill="url(#gold-text)" font-size="52" font-weight="900">أمجاد</text>
-                        
-                        <!-- نصوص الإهداء والتبريكات السفلية الثابتة -->
-                        <text x="300" y="830" text-anchor="middle" fill="url(#gold-text)" font-size="20" font-weight="bold">تخرجك اليوم سعادة تملأ قلبي وفخر لا يوصف</text>
-                        <text x="300" y="870" text-anchor="middle" fill="url(#gold-text)" font-size="20" font-weight="bold">ألف مبروك هذا الإنجاز، وأسأل الله أن يوفقك</text>
-                        <text x="300" y="910" text-anchor="middle" fill="url(#gold-text)" font-size="20" font-weight="bold">فـي كـل خـطـواتـك الـقـادمة</text>
                     </svg>
                 </div>
             </div>
         </div>
 
         <!-- القسم الأيمن: لوحة التخصيص والأزرار -->
-        <div class="w-full md:w-1/2 max-w-md bg-[#fffdf9]/90 backdrop-blur-md rounded-3xl p-8 shadow-xl border border-white/60 flex flex-col justify-between min-h-[550px]">
+        <div class="w-full md:w-1/2 max-w-md bg-[#fffdf9]/90 backdrop-blur-md rounded-3xl p-8 shadow-xl border border-white/60 flex flex-col justify-between min-h-[500px]">
             <div>
-                <span class="text-xs font-bold text-amber-700 bg-amber-100 px-3 py-1 rounded-full w-max block mb-4">تهنئة التخرج</span>
+                <span class="text-xs font-bold text-amber-700 bg-amber-100 px-3 py-1 rounded-full w-max block mb-4">تهنئة التخرج بالصورة المخصصة</span>
                 
                 <h1 class="text-4xl font-black text-[#1f160e] leading-tight mb-4">
-                    اكتب اسم الخريج على بطاقة التهنئة
+                    اكتب اسم الخريج على صورتك الخاصة
                 </h1>
                 
                 <p class="text-sm text-gray-600 mb-8 leading-relaxed">
-                    أدخل الاسم في الحقل أدناه ليتم تطبيقه فوراً بخط ذهبي متناغم وجميل فوق التصميم، ثم حمل بطاقتك بجودة عالية الجودة.
+                    أدخل الاسم في الحقل أدناه ليتم وضعه برمجياً فوق صورتك المرفوعة مباشرة، ثم حمل بطاقتك الناتجة بجودة ممتازة للطباعة والمشاركة.
                 </p>
                 
                 <!-- حقل الإدخال -->
@@ -143,7 +90,7 @@
 
     </div>
 
-    <!-- جافا سكريبت المعالجة والتحميل -->
+    <!-- جافا سكريبت المعالجة والتحميل مع دعم الصور الخارجية -->
     <script>
         const nameInput = document.getElementById('name-input');
         const svgNameTarget = document.getElementById('svg-name-target');
@@ -177,22 +124,29 @@
             const blobURL = URL.createObjectURL(svgBlob);
             
             const image = new Image();
+            // تفعيل ميزة الأمان للمواقع الخارجية للسماح بتحميل الصورة مع الاسم المكتوب
+            image.crossOrigin = 'anonymous'; 
+            
             image.onload = () => {
                 const canvas = document.createElement('canvas');
-                // أبعاد ممتازة وعالية الدقة تناسب شاشات الجوال والطباعة
                 canvas.width = 1200;  
                 canvas.height = 2000; 
                 const context = canvas.getContext('2d');
                 
                 context.drawImage(image, 0, 0, 1200, 2000);
                 
-                const pngURL = canvas.toDataURL('image/png');
-                const downloadLink = document.createElement('a');
-                downloadLink.href = pngURL;
-                downloadLink.download = `بطاقة_تخرج_${nameInput.value.trim() || 'تهنئة'}.png`;
-                document.body.appendChild(downloadLink);
-                downloadLink.click();
-                document.body.removeChild(downloadLink);
+                try {
+                    const pngURL = canvas.toDataURL('image/png');
+                    const downloadLink = document.createElement('a');
+                    downloadLink.href = pngURL;
+                    downloadLink.download = `بطاقة_مخصصة_${nameInput.value.trim() || 'تهنئة'}.png`;
+                    document.body.appendChild(downloadLink);
+                    downloadLink.click();
+                    document.body.removeChild(downloadLink);
+                } catch (err) {
+                    alert('تنبيه أمان: خادم استضافة صورتك يمنع تحميلها مدمجة. يرجى التأكد من رفع الصورة على موقع يدعم مشاركة الصور المباشرة المفتوحة (مثل Imgur أو نفس مستودع GitHub).');
+                    console.error(err);
+                }
             };
             image.src = blobURL;
         });
