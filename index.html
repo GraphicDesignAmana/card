@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>صانع بطاقات التخرج الاحترافي</title>
+    <title>صانع بطاقات التخرج</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap');
@@ -20,17 +20,16 @@
 </head>
 <body class="min-h-screen flex flex-col items-center justify-start p-4 md:p-8">
 
-    <!-- حاوية مرنة مخصصة للجوال لمنع تداخل النصوص والتحكم -->
     <div class="w-full max-w-5xl flex flex-col lg:flex-row gap-6 items-center lg:items-stretch justify-center my-auto">
         
-        <!-- القسم الأيسر: معاينة بطاقة التخرج بالأبعاد الأصلية الكاملة لتجنب الاقتصاص والزوم -->
+        <!-- القسم الأيسر: معاينة بطاقة التخرج بأبعادها الأصلية الكاملة -->
         <div class="w-full max-w-[360px] flex flex-col items-center">
             <div class="preview-card p-3 w-full border border-white/40">
-                <!-- تم ضبط الـ viewBox هنا بدقة متناهية ليطابق نسبة أبعاد الصورة الطولية الكاملة بدون أي قص -->
-                <div id="card-container" class="relative w-full rounded-xl overflow-hidden shadow-lg border border-gray-200 bg-slate-800">
+                <div id="card-container" class="relative w-full rounded-xl overflow-hidden shadow-lg border border-gray-200 bg-slate-900">
+                    <!-- تم ضبط الـ viewBox هنا بناءً على الأبعاد المثالية لنسبة طول وعرض صورتك -->
                     <svg id="card-svg" viewBox="0 0 640 1136" class="w-full h-auto block" xmlns="http://www.w3.org/2000/svg">
                         <defs>
-                            <!-- لون ذهبي متناغم وساطع للكتابة يطابق لون التصميم الأصلي -->
+                            <!-- لون ذهبي ساطع وواضح ومطابق لتفاصيل بطاقتك -->
                             <linearGradient id="gold-text" x1="0%" y1="0%" x2="100%" y2="0%">
                                 <stop offset="0%" style="stop-color:#ffe8b3;stop-opacity:1" />
                                 <stop offset="50%" style="stop-color:#dcb36c;stop-opacity:1" />
@@ -38,27 +37,27 @@
                             </linearGradient>
                         </defs>
                         
-                        <!-- سحب الصورة باستخدام خاصية fill لكي تظهر كاملة بحدودها الأصلية دون تكبير مشوه للحروف -->
-                        <image href="https://cdn.phototourl.com/free/2026-07-13-674f1693-0a32-41b1-a9ba-b6e178532198.png" width="1342" height="2235" x="0" y="0" preserveAspectRatio="xMidYMid fill" crossorigin="anonymous"/>
+                        <!-- هنا يتم استدعاء الصورة المرفوعة مباشرة من المستودع لتظهر دقيقة وبدون أي زوم -->
+                        <image href="grad.jpg" width="640" height="1136" x="0" y="0" preserveAspectRatio="xMidYMid meet" crossorigin="anonymous"/>
                         
-                        <!-- الاسم: يمكنك التحكم بموقعه وحجمه بسهولة -->
+                        <!-- الاسم: يمكنك رفعه أو خفضه باستخدام شريط التحكم -->
                         <text id="svg-name-target" x="320" y="730" text-anchor="middle" fill="url(#gold-text)" font-size="52" font-weight="900">أمجاد</text>
                     </svg>
                 </div>
             </div>
         </div>
 
-        <!-- القسم الأيمن: لوحة التحكم المحدثة لتكون متجاوبة 100% مع الجوالات بدون تداخل -->
+        <!-- القسم الأيمن: لوحة التحكم متوافقة 100% مع الجوال -->
         <div class="w-full max-w-[400px] bg-[#fffdf9]/95 backdrop-blur-md rounded-3xl p-6 shadow-xl border border-white/60 flex flex-col justify-between">
             <div>
-                <span class="text-xs font-bold text-amber-700 bg-amber-100 px-3 py-1 rounded-full w-max block mb-3">أداة التخصيص الذكية</span>
+                <span class="text-xs font-bold text-amber-700 bg-amber-100 px-3 py-1 rounded-full w-max block mb-3">أداة التخصيص</span>
                 
-                <h1 class="text-2xl md:text-3xl font-black text-[#1f160e] leading-tight mb-2">
-                    اكتب اسم الخريج
+                <h1 class="text-2xl font-black text-[#1f160e] leading-tight mb-2">
+                    اكتب الاسم واضبط مكانه
                 </h1>
                 
                 <p class="text-xs text-gray-600 mb-4 leading-relaxed">
-                    أدخل الاسم، واستخدم شريط التحكم لتحريك الاسم ليتناسب مع الفراغ المتاح في صورتك الأصلية الكاملة.
+                    اكتب الاسم بالأسفل، واستخدم شريط التحكم لرفعه أو خفضه لكي يظهر في الفراغ المخصص له فوق صورتك الأصلية تماماً.
                 </p>
                 
                 <!-- حقل الإدخال -->
@@ -67,7 +66,7 @@
                     <input type="text" id="name-input" value="أمجاد" placeholder="اكتب الاسم هنا..." class="w-full px-3 py-2 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-600 text-sm font-medium transition">
                 </div>
 
-                <!-- شريط التحكم في موقع الاسم (عمودياً Y) -->
+                <!-- شريط التحكم في موقع الاسم (Y) -->
                 <div class="mb-3">
                     <div class="flex justify-between text-xs font-bold text-gray-700 mb-1">
                         <label for="position-y">موقع الاسم (لأعلى ولأسفل)</label>
@@ -82,26 +81,18 @@
                         <label for="font-size">حجم خط الاسم</label>
                         <span id="val-size" class="text-amber-800">52px</span>
                     </div>
-                    <input type="range" id="font-size" min="20" max="110" value="52" class="w-full accent-amber-700">
+                    <input type="range" id="font-size" min="25" max="100" value="52" class="w-full accent-amber-700">
                 </div>
             </div>
 
             <!-- أزرار العمليات -->
             <div class="space-y-2 mt-2">
-                <div class="flex gap-2">
-                    <button id="btn-update" class="w-1/2 bg-[#3a4847] hover:bg-[#2e3a39] text-white text-xs font-bold py-3 px-2 rounded-xl transition shadow-md">
-                        تحديث المعاينة
-                    </button>
-                    <button id="btn-download" class="w-1/2 bg-[#b58d43] hover:bg-[#9c7634] text-white text-xs font-bold py-3 px-2 rounded-xl transition shadow-md">
-                        تحميل بطاقة PNG
-                    </button>
-                </div>
+                <button id="btn-download" class="w-full bg-[#b58d43] hover:bg-[#9c7634] text-white text-sm font-bold py-3.5 rounded-xl transition shadow-md flex items-center justify-center gap-2">
+                    تحميل بطاقة PNG بجودة عالية
+                </button>
                 <button id="btn-clear" class="w-full bg-transparent border border-gray-300 hover:bg-gray-100 text-gray-500 text-xs font-medium py-2 rounded-xl transition">
                     مسح الاسم
                 </button>
-                <div class="text-center">
-                    <span id="status-msg" class="text-xs text-emerald-700 font-medium hidden">✓ جاهز للتحميل.</span>
-                </div>
             </div>
         </div>
 
@@ -115,8 +106,6 @@
         const fontSize = document.getElementById('font-size');
         const valY = document.getElementById('val-y');
         const valSize = document.getElementById('val-size');
-        
-        const btnUpdate = document.getElementById('btn-update');
         const btnDownload = document.getElementById('btn-download');
         const btnClear = document.getElementById('btn-clear');
 
@@ -136,10 +125,6 @@
             valSize.textContent = sizeValue + 'px';
         });
 
-        btnUpdate.addEventListener('click', () => {
-            svgNameTarget.textContent = nameInput.value.trim() || "أمجاد";
-        });
-
         btnClear.addEventListener('click', () => {
             nameInput.value = '';
             svgNameTarget.textContent = "أمجاد";
@@ -157,7 +142,6 @@
             
             image.onload = () => {
                 const canvas = document.createElement('canvas');
-                // حفظ الصورة بدقتها الأصلية الكاملة عند التحميل لتكون واضحة جداً
                 canvas.width = 640;  
                 canvas.height = 1136; 
                 const context = canvas.getContext('2d');
