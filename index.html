@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>صانع بطاقات التخرج المخصصة</title>
+    <title>صانع بطاقات التخرج الاحترافي</title>
     <!-- تضمين مكتبة Tailwind CSS للتنسيق العصري -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap');
         body {
             font-family: 'Cairo', sans-serif;
             background-color: #e6ded4; 
@@ -23,14 +23,14 @@
 
     <div class="w-full max-w-6xl flex flex-col md:flex-row gap-8 items-center justify-center">
         
-        <!-- القسم الأيسر: معاينة بطاقة التخرج العمودية بالصورة الخاصة بك -->
+        <!-- القسم الأيسر: معاينة بطاقة التخرج العمودية بالصورة المحددة -->
         <div class="w-full md:w-1/2 flex flex-col items-center">
             <div class="preview-card p-4 w-full max-w-[380px] border border-white/40">
-                <!-- حاوية الرسم (Canvas/SVG) بأبعاد عمودية متناسقة 600×1000 -->
-                <div id="card-container" class="relative w-full rounded-xl overflow-hidden shadow-xl border border-gray-200 bg-slate-100">
+                <!-- حاوية الرسم (Canvas/SVG) بأبعاد عمودية متناسقة ومضبوطة للاستجابة -->
+                <div id="card-container" class="relative w-full rounded-xl overflow-hidden shadow-xl border border-gray-300 bg-slate-900">
                     <svg id="card-svg" viewBox="0 0 600 1000" class="w-full h-auto block" xmlns="http://www.w3.org/2000/svg">
                         <defs>
-                            <!-- التدرج الذهبي الساطع للاسم لتطابق الألوان -->
+                            <!-- التدرج الذهبي الساطع الفخم والمتناغم للاسم ليكون واضحاً وساطعاً -->
                             <linearGradient id="gold-text" x1="0%" y1="0%" x2="100%" y2="0%">
                                 <stop offset="0%" style="stop-color:#ffe8b3;stop-opacity:1" />
                                 <stop offset="50%" style="stop-color:#dcb36c;stop-opacity:1" />
@@ -38,34 +38,51 @@
                             </linearGradient>
                         </defs>
                         
-                        <!-- جلب صورتك الخاصة لتكون هي الخلفية بالكامل بنفس الأبعاد الطولية -->
-                        <!-- استبدل رابط الصورة بالرابط الخاص بك مع الحفاظ على الأقواس وعلامات التنصيص -->
+                        <!-- جلب صورتك المحددة مع استخدام خاصية slice لملء الإطار بالكامل بشكل متناسق ومنع التمدد المشوه -->
                         <image href="https://i.ibb.co/35frnkct/jpg.jpg" width="600" height="1000" x="0" y="0" preserveAspectRatio="xMidYMid slice" crossorigin="anonymous"/>
                         
-                        <!-- مساحة ديناميكية متناغمة ومخصصة لاسم الخريج (يمكنك تعديل قيم Y بالأسفل لرفع أو خفض الاسم) -->
-                        <text id="svg-name-target" x="300" y="730" text-anchor="middle" fill="url(#gold-text)" font-size="52" font-weight="900">أمجاد</text>
+                        <!-- الاسم الديناميكي: تم ضبط موقعه الافتراضي وحجمه، ويمكن التحكم به عبر شريط التمرير -->
+                        <text id="svg-name-target" x="300" y="730" text-anchor="middle" fill="url(#gold-text)" font-size="52" font-weight="900" style="direction: rtl;">أمجاد</text>
                     </svg>
                 </div>
             </div>
         </div>
 
-        <!-- القسم الأيمن: لوحة التخصيص والأزرار -->
-        <div class="w-full md:w-1/2 max-w-md bg-[#fffdf9]/90 backdrop-blur-md rounded-3xl p-8 shadow-xl border border-white/60 flex flex-col justify-between min-h-[500px]">
+        <!-- القسم الأيمن: لوحة التخصيص والتحكم الكامل بموقع وحجم النص -->
+        <div class="w-full md:w-1/2 max-w-md bg-[#fffdf9]/90 backdrop-blur-md rounded-3xl p-8 shadow-xl border border-white/60 flex flex-col justify-between min-h-[580px]">
             <div>
-                <span class="text-xs font-bold text-amber-700 bg-amber-100 px-3 py-1 rounded-full w-max block mb-4">تهنئة التخرج بالصورة المخصصة</span>
+                <span class="text-xs font-bold text-amber-700 bg-amber-100 px-3 py-1 rounded-full w-max block mb-4">أداة التخصيص الذكية</span>
                 
                 <h1 class="text-4xl font-black text-[#1f160e] leading-tight mb-4">
-                    اكتب اسم الخريج على صورتك الخاصة
+                    اكتب اسم الخريج وتحكم بموقعه
                 </h1>
                 
-                <p class="text-sm text-gray-600 mb-8 leading-relaxed">
-                    أدخل الاسم في الحقل أدناه ليتم وضعه برمجياً فوق صورتك المرفوعة مباشرة، ثم حمل بطاقتك الناتجة بجودة ممتازة للطباعة والمشاركة.
+                <p class="text-sm text-gray-600 mb-6 leading-relaxed">
+                    أدخل الاسم، واستخدم أدوات التحكم بالأسفل لتحريك الاسم بدقة لأعلى أو أسفل وتكبير الحجم ليتناسب تماماً مع الفراغ المتاح في صورتك المرفوعة.
                 </p>
                 
                 <!-- حقل الإدخال -->
-                <div class="mb-6">
+                <div class="mb-5">
                     <label for="name-input" class="block text-xs font-bold text-gray-700 mb-2">اسم الخريج / الخريجة</label>
                     <input type="text" id="name-input" value="أمجاد" placeholder="اكتب الاسم هنا..." class="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-600 focus:border-transparent text-gray-800 font-medium transition">
+                </div>
+
+                <!-- شريط التحكم في موقع الاسم (عمودياً Y) -->
+                <div class="mb-4">
+                    <div class="flex justify-between text-xs font-bold text-gray-700 mb-1">
+                        <label for="position-y">موقع الاسم (لأعلى ولأسفل)</label>
+                        <span id="val-y">730</span>
+                    </div>
+                    <input type="range" id="position-y" min="100" max="950" value="730" class="w-full accent-amber-700">
+                </div>
+
+                <!-- شريط التحكم في حجم الخط -->
+                <div class="mb-6">
+                    <div class="flex justify-between text-xs font-bold text-gray-700 mb-1">
+                        <label for="font-size">حجم خط الاسم</label>
+                        <span id="val-size">52px</span>
+                    </div>
+                    <input type="range" id="font-size" min="20" max="100" value="52" class="w-full accent-amber-700">
                 </div>
             </div>
 
@@ -73,14 +90,14 @@
             <div class="space-y-3">
                 <div class="flex gap-3">
                     <button id="btn-update" class="w-1/2 bg-[#3a4847] hover:bg-[#2e3a39] text-white text-sm font-bold py-3.5 px-4 rounded-xl transition shadow-md">
-                        تحديث البطاقة
+                        تحديث المعاينة
                     </button>
                     <button id="btn-download" class="w-1/2 bg-[#b58d43] hover:bg-[#9c7634] text-white text-sm font-bold py-3.5 px-4 rounded-xl transition shadow-md">
                         تحميل بطاقة PNG
                     </button>
                 </div>
                 <button id="btn-clear" class="w-full bg-transparent border border-gray-300 hover:bg-gray-100 text-gray-600 text-sm font-medium py-2 px-4 rounded-xl transition">
-                    مسح حقل الاسم
+                    مسح الاسم
                 </button>
                 <div class="text-center">
                     <span id="status-msg" class="text-xs text-emerald-700 font-medium hidden">✓ تم التحديث بنجاح! جاهز للتحميل.</span>
@@ -90,10 +107,15 @@
 
     </div>
 
-    <!-- جافا سكريبت المعالجة والتحميل مع دعم الصور الخارجية -->
+    <!-- جافا سكريبت التفاعلية للتحكم بالنص وتصدير الصورة -->
     <script>
         const nameInput = document.getElementById('name-input');
         const svgNameTarget = document.getElementById('svg-name-target');
+        const positionY = document.getElementById('position-y');
+        const fontSize = document.getElementById('font-size');
+        const valY = document.getElementById('val-y');
+        const valSize = document.getElementById('val-size');
+        
         const btnUpdate = document.getElementById('btn-update');
         const btnDownload = document.getElementById('btn-download');
         const btnClear = document.getElementById('btn-clear');
@@ -102,6 +124,20 @@
         // تحديث النص الحي أثناء الكتابة
         nameInput.addEventListener('input', () => {
             svgNameTarget.textContent = nameInput.value.trim() || "أمجاد";
+        });
+
+        // تحريك موضع الاسم عمودياً
+        positionY.addEventListener('input', (e) => {
+            const yValue = e.target.value;
+            svgNameTarget.setAttribute('y', yValue);
+            valY.textContent = yValue;
+        });
+
+        // تغيير حجم الخط ديناميكياً
+        fontSize.addEventListener('input', (e) => {
+            const sizeValue = e.target.value;
+            svgNameTarget.setAttribute('font-size', sizeValue);
+            valSize.textContent = sizeValue + 'px';
         });
 
         btnUpdate.addEventListener('click', () => {
@@ -124,11 +160,11 @@
             const blobURL = URL.createObjectURL(svgBlob);
             
             const image = new Image();
-            // تفعيل ميزة الأمان للمواقع الخارجية للسماح بتحميل الصورة مع الاسم المكتوب
             image.crossOrigin = 'anonymous'; 
             
             image.onload = () => {
                 const canvas = document.createElement('canvas');
+                // الاحتفاظ بدقة عالية جداً للتحميل (1200×2000) لتظهر التفاصيل والخطوط واضحة
                 canvas.width = 1200;  
                 canvas.height = 2000; 
                 const context = canvas.getContext('2d');
@@ -139,12 +175,12 @@
                     const pngURL = canvas.toDataURL('image/png');
                     const downloadLink = document.createElement('a');
                     downloadLink.href = pngURL;
-                    downloadLink.download = `بطاقة_مخصصة_${nameInput.value.trim() || 'تهنئة'}.png`;
+                    downloadLink.download = `بطاقة_تخرج_${nameInput.value.trim() || 'مخصصة'}.png`;
                     document.body.appendChild(downloadLink);
                     downloadLink.click();
                     document.body.removeChild(downloadLink);
                 } catch (err) {
-                    alert('تنبيه أمان: خادم استضافة صورتك يمنع تحميلها مدمجة. يرجى التأكد من رفع الصورة على موقع يدعم مشاركة الصور المباشرة المفتوحة (مثل Imgur أو نفس مستودع GitHub).');
+                    alert('تنبيه أمان: خادم استضافة صورتك يمنع دمجها مباشرة بسبب قيود حماية الروابط الخارجية. إذا واجهتك مشكلة في التحميل، يرجى رفع الصورة في نفس مستودع GitHub وتغيير الرابط إلى اسم الملف فقط.');
                     console.error(err);
                 }
             };
