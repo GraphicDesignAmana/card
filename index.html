@@ -20,16 +20,15 @@
 </head>
 <body class="min-h-screen flex flex-col items-center justify-start p-4 md:p-8">
 
-    <div class="w-full max-w-5xl flex flex-col lg:flex-row gap-6 items-center lg:items-stretch justify-center my-auto">
+    <!-- ================== الشاشة الأولى: شاشة التصميم والتعديل ================== -->
+    <div id="design-screen" class="w-full max-w-5xl flex flex-col lg:flex-row gap-6 items-center lg:items-stretch justify-center my-auto">
         
-        <!-- القسم الأيسر: معاينة بطاقة التخرج بأبعادها الأصلية الكاملة -->
+        <!-- القسم الأيسر: معاينة بطاقة التخرج بالأبعاد الحقيقية -->
         <div class="w-full max-w-[360px] flex flex-col items-center">
             <div class="preview-card p-3 w-full border border-white/40">
                 <div id="card-container" class="relative w-full rounded-xl overflow-hidden shadow-lg border border-gray-200 bg-slate-900">
-                    <!-- تم ضبط الـ viewBox هنا بناءً على الأبعاد المثالية لنسبة طول وعرض صورتك -->
                     <svg id="card-svg" viewBox="0 0 640 1136" class="w-full h-auto block" xmlns="http://www.w3.org/2000/svg">
                         <defs>
-                            <!-- لون ذهبي ساطع وواضح ومطابق لتفاصيل بطاقتك -->
                             <linearGradient id="gold-text" x1="0%" y1="0%" x2="100%" y2="0%">
                                 <stop offset="0%" style="stop-color:#ffe8b3;stop-opacity:1" />
                                 <stop offset="50%" style="stop-color:#dcb36c;stop-opacity:1" />
@@ -37,27 +36,27 @@
                             </linearGradient>
                         </defs>
                         
-                        <!-- هنا يتم استدعاء الصورة المرفوعة مباشرة من المستودع لتظهر دقيقة وبدون أي زوم -->
+                        <!-- استدعاء الصورة المرفوعة في حسابك GitHub مباشرة -->
                         <image href="grad.jpg" width="640" height="1136" x="0" y="0" preserveAspectRatio="xMidYMid meet" crossorigin="anonymous"/>
                         
-                        <!-- الاسم: يمكنك رفعه أو خفضه باستخدام شريط التحكم -->
-                        <text id="svg-name-target" x="320" y="730" text-anchor="middle" fill="url(#gold-text)" font-size="52" font-weight="900">أمجاد</text>
+                        <!-- الاسم المكتوب -->
+                        <text id="svg-name-target" x="320" y="580" text-anchor="middle" fill="url(#gold-text)" font-size="52" font-weight="900">أمجاد</text>
                     </svg>
                 </div>
             </div>
         </div>
 
-        <!-- القسم الأيمن: لوحة التحكم متوافقة 100% مع الجوال -->
+        <!-- القسم الأيمن: لوحة التحكم بالتصميم -->
         <div class="w-full max-w-[400px] bg-[#fffdf9]/95 backdrop-blur-md rounded-3xl p-6 shadow-xl border border-white/60 flex flex-col justify-between">
             <div>
-                <span class="text-xs font-bold text-amber-700 bg-amber-100 px-3 py-1 rounded-full w-max block mb-3">أداة التخصيص</span>
+                <span class="text-xs font-bold text-amber-700 bg-amber-100 px-3 py-1 rounded-full w-max block mb-3">أداة التخصيص الذكية</span>
                 
                 <h1 class="text-2xl font-black text-[#1f160e] leading-tight mb-2">
                     اكتب الاسم واضبط مكانه
                 </h1>
                 
                 <p class="text-xs text-gray-600 mb-4 leading-relaxed">
-                    اكتب الاسم بالأسفل، واستخدم شريط التحكم لرفعه أو خفضه لكي يظهر في الفراغ المخصص له فوق صورتك الأصلية تماماً.
+                    اكتب الاسم بالأسفل، واستخدم شريط التحكم لرفعه أو خفضه ليتناسب مع موقع البطاقة الأصلي تماماً قبل الحفظ.
                 </p>
                 
                 <!-- حقل الإدخال -->
@@ -66,16 +65,16 @@
                     <input type="text" id="name-input" value="أمجاد" placeholder="اكتب الاسم هنا..." class="w-full px-3 py-2 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-600 text-sm font-medium transition">
                 </div>
 
-                <!-- شريط التحكم في موقع الاسم (Y) -->
+                <!-- التحكم في موقع الاسم (عمودياً Y) -->
                 <div class="mb-3">
                     <div class="flex justify-between text-xs font-bold text-gray-700 mb-1">
                         <label for="position-y">موقع الاسم (لأعلى ولأسفل)</label>
-                        <span id="val-y" class="text-amber-800">730</span>
+                        <span id="val-y" class="text-amber-800">580</span>
                     </div>
-                    <input type="range" id="position-y" min="200" max="1100" value="730" class="w-full accent-amber-700">
+                    <input type="range" id="position-y" min="200" max="1100" value="580" class="w-full accent-amber-700">
                 </div>
 
-                <!-- شريط التحكم في حجم الخط -->
+                <!-- التحكم في حجم الخط -->
                 <div class="mb-4">
                     <div class="flex justify-between text-xs font-bold text-gray-700 mb-1">
                         <label for="font-size">حجم خط الاسم</label>
@@ -85,20 +84,44 @@
                 </div>
             </div>
 
-            <!-- أزرار العمليات -->
+            <!-- زر التجهيز والانتقال لصفحة الحفظ -->
             <div class="space-y-2 mt-2">
-                <button id="btn-download" class="w-full bg-[#b58d43] hover:bg-[#9c7634] text-white text-sm font-bold py-3.5 rounded-xl transition shadow-md flex items-center justify-center gap-2">
-                    تحميل بطاقة PNG بجودة عالية
-                </button>
-                <button id="btn-clear" class="w-full bg-transparent border border-gray-300 hover:bg-gray-100 text-gray-500 text-xs font-medium py-2 rounded-xl transition">
-                    مسح الاسم
+                <button id="btn-generate" class="w-full bg-[#b58d43] hover:bg-[#9c7634] text-white text-sm font-bold py-4 rounded-xl transition shadow-md flex items-center justify-center gap-2">
+                    تجهيز البطاقة للحفظ ✦
                 </button>
             </div>
         </div>
-
     </div>
 
-    <!-- جافا سكريبت التفاعلية -->
+
+    <!-- ================== الشاشة الثانية: شاشة الحفظ الفوري (تظهر بعد التجهيز) ================== -->
+    <div id="save-screen" class="w-full max-w-md flex flex-col items-center justify-center my-auto hidden">
+        <div class="bg-[#fffdf9] rounded-3xl p-6 shadow-2xl border border-white/60 w-full text-center">
+            
+            <span class="text-3xl">🎉</span>
+            <h2 class="text-xl font-black text-[#1f160e] mt-2 mb-1">تمت صناعة بطاقتك بنجاح!</h2>
+            <p class="text-xs text-emerald-700 font-bold mb-4 bg-emerald-50 py-1.5 px-3 rounded-full inline-block">
+                📱 اضغط مطولاً على الصورة بالأسفل لحفظها في جهازك
+            </p>
+
+            <!-- هنا ستظهر الصورة المدمجة والنهائية كملف صورة عادي يدعم الحفظ اليدوي المباشر للجوال -->
+            <div class="relative w-full max-w-[290px] mx-auto rounded-2xl overflow-hidden shadow-lg border border-gray-200 mb-6">
+                <img id="final-card-img" src="" alt="بطاقة التخرج المخصصة" class="w-full h-auto block select-none">
+            </div>
+
+            <!-- أزرار التحكم بالرجوع -->
+            <div class="space-y-2">
+                <button id="btn-back" class="w-full bg-slate-800 hover:bg-slate-900 text-white text-xs font-bold py-3 rounded-xl transition">
+                    ← العودة وتعديل الاسم
+                </button>
+                <p class="text-[10px] text-gray-400 mt-2">
+                    ملاحظة: إذا لم يظهر خيار الحفظ عند الضغط المطول، يمكنك التقاط شاشة (Screenshot) للبطاقة مباشرة.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- جافا سكريبت التفاعلية لإدارة الصفحات ومعالجة الصورة -->
     <script>
         const nameInput = document.getElementById('name-input');
         const svgNameTarget = document.getElementById('svg-name-target');
@@ -106,9 +129,17 @@
         const fontSize = document.getElementById('font-size');
         const valY = document.getElementById('val-y');
         const valSize = document.getElementById('val-size');
-        const btnDownload = document.getElementById('btn-download');
-        const btnClear = document.getElementById('btn-clear');
+        
+        // شاشات العرض
+        const designScreen = document.getElementById('design-screen');
+        const saveScreen = document.getElementById('save-screen');
+        
+        // الأزرار وصورة الحفظ
+        const btnGenerate = document.getElementById('btn-generate');
+        const btnBack = document.getElementById('btn-back');
+        const finalCardImg = document.getElementById('final-card-img');
 
+        // تحديث حي ومستمر أثناء الكتابة والتعديل
         nameInput.addEventListener('input', () => {
             svgNameTarget.textContent = nameInput.value.trim() || "أمجاد";
         });
@@ -125,43 +156,63 @@
             valSize.textContent = sizeValue + 'px';
         });
 
-        btnClear.addEventListener('click', () => {
-            nameInput.value = '';
-            svgNameTarget.textContent = "أمجاد";
+        // العودة للشاشة الأولى للتعديل
+        btnBack.addEventListener('click', () => {
+            saveScreen.classList.add('hidden');
+            designScreen.classList.remove('hidden');
         });
 
-        btnDownload.addEventListener('click', () => {
-            const svgElement = document.getElementById('card-svg');
-            const svgString = new XMLSerializer().serializeToString(svgElement);
-            const svgBlob = new Blob([svgString], { type: 'image/svg+xml;charset=utf-8' });
-            const URL = window.URL || window.webkitURL || window;
-            const blobURL = URL.createObjectURL(svgBlob);
+        // الانتقال للشاشة الثانية وتجهيز الصورة المسطحة للحفظ
+        btnGenerate.addEventListener('click', () => {
+            // استخدام Canvas مدمج لمعالجة الصورة والاسم محلياً بدون تدمير دقة الحماية
+            const canvas = document.createElement('canvas');
+            canvas.width = 640;
+            canvas.height = 1136;
+            const context = canvas.getContext('2d');
+
+            const bgImg = new Image();
+            bgImg.crossOrigin = 'anonymous'; // لتفادي مشاكل الأمان
             
-            const image = new Image();
-            image.crossOrigin = 'anonymous'; 
-            
-            image.onload = () => {
-                const canvas = document.createElement('canvas');
-                canvas.width = 640;  
-                canvas.height = 1136; 
-                const context = canvas.getContext('2d');
+            // تحميل الصورة الأصلية المرفوعة في مجلدك بـ GitHub
+            bgImg.src = 'grad.jpg'; 
+
+            bgImg.onload = () => {
+                // 1. رسم الصورة الأصلية كخلفية للـ Canvas بدقتها الكاملة
+                context.drawImage(bgImg, 0, 0, 640, 1136);
+
+                // 2. تصميم الخط وتأثير التدرج الذهبي المتناسق للاسم
+                const size = fontSize.value;
+                const y = positionY.value;
+                const text = nameInput.value.trim() || "أمجاد";
+
+                context.font = `900 ${size}px 'Cairo', sans-serif`;
+                context.textAlign = 'center';
                 
-                context.drawImage(image, 0, 0, 640, 1136);
+                // تدرج لوني ذهبي ممتاز مطابق للبطاقة
+                const goldGradient = context.createLinearGradient(0, 0, 640, 0);
+                goldGradient.addColorStop(0, '#ffe8b3');
+                goldGradient.addColorStop(0.5, '#dcb36c');
+                goldGradient.addColorStop(1, '#b58d43');
                 
-                try {
-                    const pngURL = canvas.toDataURL('image/png');
-                    const downloadLink = document.createElement('a');
-                    downloadLink.href = pngURL;
-                    downloadLink.download = `بطاقة_تخرج_${nameInput.value.trim() || 'مخصصة'}.png`;
-                    document.body.appendChild(downloadLink);
-                    downloadLink.click();
-                    document.body.removeChild(downloadLink);
-                } catch (err) {
-                    alert('يرجى التحميل من المتصفح مباشرة.');
-                    console.error(err);
-                }
+                context.fillStyle = goldGradient;
+                
+                // 3. كتابة الاسم فوق الـ Canvas بالاحداثيات المحددة
+                context.fillText(text, 320, y);
+
+                // 4. تحويل الناتج إلى ملف صورة مسطح بصيغة PNG
+                const renderedDataUrl = canvas.toDataURL('image/png');
+                
+                // 5. حقن الصورة في عنصر الـ img الخاص بصفحة الحفظ
+                finalCardImg.src = renderedDataUrl;
+
+                // 6. التحويل للشاشة الثانية فوراً وبسلاسة
+                designScreen.classList.add('hidden');
+                saveScreen.classList.remove('hidden');
             };
-            image.src = blobURL;
+
+            bgImg.onerror = () => {
+                alert('عذراً، لم نتمكن من العثور على ملف الصورة المسمى grad.jpg في مجلد GitHub الخاص بك. يرجى التأكد من رفعه بنفس الاسم تماماً بجانب كود الصفحة.');
+            };
         });
     </script>
 </body>
