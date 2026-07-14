@@ -33,41 +33,29 @@
         </p>
 
         <!-- شبكة القوالب المصغرة -->
-        <!-- يمكنك التحكم بعدد الأعمدة في الجوال والشاشات الكبيرة من الكلاس بالأسفل: grid-cols-1 (للجوال عمود واحد) و sm:grid-cols-3 (للشاشات الأكبر) -->
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 px-4">
             
-            <!-- ========================================== -->
-            <!--   بداية قسم إضافة / حذف القوالب بسهولة    -->
-            <!-- ========================================== -->
-
-            <!-- القالب الأول (احذفه أو انسخه لعمل قالب جديد) -->
+            <!-- القالب الأول (تم تمرير اللون الذهبي #b58d43) -->
             <div class="template-card p-4 border border-white/40 flex flex-col items-center">
-                <!-- تم ضبط الارتفاع ليكون طولي ونظام الاحتواء object-contain لإظهار البطاقة كاملة دون قص -->
                 <div class="w-full aspect-[9/16] h-[340px] rounded-xl overflow-hidden bg-slate-900/10 mb-4 border border-gray-100 flex items-center justify-center">
                     <img src="grad1.jpg" alt="قالب تهنئة التخرج " class="w-full h-full object-contain">
                 </div>
                 <h3 class="font-bold text-sm text-[#1f160e] mb-3">قالب تهنئة التخرج </h3>
-                <button onclick="selectTemplate('grad1.jpg')" class="w-full bg-[#b58d43] hover:bg-[#9c7634] text-white text-xs font-bold py-2.5 rounded-xl transition shadow-md">
+                <button onclick="selectTemplate('grad1.jpg', '#b58d43')" class="w-full bg-[#b58d43] hover:bg-[#9c7634] text-white text-xs font-bold py-2.5 rounded-xl transition shadow-md">
                     اختر هذا القالب
                 </button>
             </div>
 
-            <!-- القالب الثاني -->
+            <!-- القالب الثاني (تم تمرير لون كحلي كمثال #1e293b - غيره لما يناسب قالبك) -->
             <div class="template-card p-4 border border-white/40 flex flex-col items-center">
                 <div class="w-full aspect-[9/16] h-[340px] rounded-xl overflow-hidden bg-slate-900/10 mb-4 border border-gray-100 flex items-center justify-center">
                     <img src="grad2.jpg" alt="قالب تهنئة النجاح" class="w-full h-full object-contain">
                 </div>
                 <h3 class="font-bold text-sm text-[#1f160e] mb-3">قالب تهنئة النجاح</h3>
-                <button onclick="selectTemplate('grad2.jpg')" class="w-full bg-[#b58d43] hover:bg-[#9c7634] text-white text-xs font-bold py-2.5 rounded-xl transition shadow-md">
+                <button onclick="selectTemplate('grad2.jpg', '#1e293b')" class="w-full bg-[#b58d43] hover:bg-[#9c7634] text-white text-xs font-bold py-2.5 rounded-xl transition shadow-md">
                     اختر هذا القالب
                 </button>
             </div>
-
-        
-
-            <!-- ========================================== -->
-            <!--   نهاية قسم إضافة / حذف القوالب بسهولة    -->
-            <!-- ========================================== -->
 
         </div>
     </div>
@@ -81,16 +69,9 @@
             <div class="preview-card p-3 w-full border border-white/40">
                 <div id="card-container" class="relative w-full rounded-xl overflow-hidden shadow-lg border border-gray-200 bg-slate-900">
                     <svg id="card-svg" viewBox="0 0 640 1136" class="w-full h-auto block" xmlns="http://www.w3.org/2000/svg">
-                        <defs>
-                            <linearGradient id="gold-text" x1="0%" y1="0%" x2="100%" y2="0%">
-                                <stop offset="0%" style="stop-color:#ffe8b3;stop-opacity:1" />
-                                <stop offset="50%" style="stop-color:#dcb36c;stop-opacity:1" />
-                                <stop offset="100%" style="stop-color:#b58d43;stop-opacity:1" />
-                            </linearGradient>
-                        </defs>
-                        
                         <image id="svg-template-img" href="" width="640" height="1136" x="0" y="0" preserveAspectRatio="xMidYMid meet" crossorigin="anonymous"/>
-                        <text id="svg-name-target" x="320" y="580" text-anchor="middle" fill="url(#gold-text)" font-size="52" font-weight="900">اكتب الاسم هنا</text>
+                        <!-- يتم ملء fill تلقائياً باللون الممرر من القالب المختار -->
+                        <text id="svg-name-target" x="320" y="580" text-anchor="middle" fill="" font-size="52" font-weight="900">اكتب الاسم هنا</text>
                     </svg>
                 </div>
             </div>
@@ -190,10 +171,16 @@
         const finalCardImg = document.getElementById('final-card-img');
 
         let currentSelectedTemplatePath = '';
+        let currentSelectedTemplateColor = '#b58d43'; // متغير لحفظ اللون الحالي المختار مع القالب (قيمة افتراضية)
 
-        function selectTemplate(imgName) {
+        // دالة اختيار القالب تستقبل مسار الصورة ولون النص المخصص لها
+        function selectTemplate(imgName, textColor) {
             currentSelectedTemplatePath = imgName;
+            currentSelectedTemplateColor = textColor || '#b58d43'; // تحديث المتغير باللون المرسل أو الاحتفاظ بالافتراضي
+            
             svgTemplateImg.setAttribute('href', imgName);
+            svgNameTarget.setAttribute('fill', currentSelectedTemplateColor); // تطبيق اللون فوراً على الـ SVG للمعينة
+            
             galleryScreen.classList.add('hidden');
             designScreen.classList.remove('hidden');
         }
@@ -204,7 +191,7 @@
         });
 
         nameInput.addEventListener('input', () => {
-            svgNameTarget.textContent = nameInput.value.trim() || "اكتب هنا  الاسم";
+            svgNameTarget.textContent = nameInput.value.trim() || "اكتب هنا الاسم";
         });
 
         positionY.addEventListener('input', (e) => {
@@ -244,12 +231,8 @@
                 context.font = `900 ${size}px 'Cairo', sans-serif`;
                 context.textAlign = 'center';
                 
-                const goldGradient = context.createLinearGradient(0, 0, 640, 0);
-                goldGradient.addColorStop(0, '#ffe8b3');
-                goldGradient.addColorStop(0.5, '#dcb36c');
-                goldGradient.addColorStop(1, '#b58d43');
-                
-                context.fillStyle = goldGradient;
+                // استخدام لون القالب النشط حالياً عند رسم الاسم على الكانفاس لتجهيز الصورة للحفظ
+                context.fillStyle = currentSelectedTemplateColor;
                 context.fillText(text, 320, y);
 
                 const renderedDataUrl = canvas.toDataURL('image/png');
