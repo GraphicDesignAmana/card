@@ -26,20 +26,28 @@
 <body class="min-h-screen flex flex-col items-center justify-start p-4 md:p-8">
 
     <!-- ================== الشاشة الأولى: معرض اختيار القوالب ================== -->
-    <div id="gallery-screen" class="w-full max-w-4xl my-auto text-center">
-        <h1 class="text-3xl md:text-4xl font-black text-[#1f160e] mt-2 mb-2">اختر قالب التهنئة </h1>
+    <div id="gallery-screen" class="w-full max-w-4xl my-auto text-center py-6">
+        <span class="text-3xl">🎓</span>
+        <h1 class="text-3xl md:text-4xl font-black text-[#1f160e] mt-2 mb-2">اختر قالب التخرج المفضل</h1>
         <p class="text-xs md:text-sm text-gray-600 mb-8 max-w-md mx-auto leading-relaxed">
-            مجموعة متميزة من بطاقات التهنئة الجاهزة، اختر التصميم الذي يعجبك .
+            مجموعة متميزة من بطاقات التخرج الجاهزة، اختر التصميم الذي يعجبك لتبدأ في كتابة اسم الخريج عليه فوراً.
         </p>
 
         <!-- شبكة القوالب المصغرة -->
+        <!-- يمكنك التحكم بعدد الأعمدة في الجوال والشاشات الكبيرة من الكلاس بالأسفل: grid-cols-1 (للجوال عمود واحد) و sm:grid-cols-3 (للشاشات الأكبر) -->
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 px-4">
-            <!-- القالب الأول -->
+            
+            <!-- ========================================== -->
+            <!--   بداية قسم إضافة / حذف القوالب بسهولة    -->
+            <!-- ========================================== -->
+
+            <!-- القالب الأول (احذفه أو انسخه لعمل قالب جديد) -->
             <div class="template-card p-4 border border-white/40 flex flex-col items-center">
-                <div class="w-full h-72 rounded-xl overflow-hidden bg-slate-900 mb-4 border border-gray-100">
-                    <img src="grad1.jpg" alt="قالب تهنئة التخرج " class="w-full h-full object-cover">
+                <!-- تم ضبط الارتفاع ليكون طولي ونظام الاحتواء object-contain لإظهار البطاقة كاملة دون قص -->
+                <div class="w-full aspect-[9/16] h-[340px] rounded-xl overflow-hidden bg-slate-900/10 mb-4 border border-gray-100 flex items-center justify-center">
+                    <img src="grad1.jpg" alt="قالب التخرج الكلاسيكي" class="w-full h-full object-contain">
                 </div>
-                <h3 class="font-bold text-sm text-[#1f160e] mb-3">قالب تهنئة التخرج </h3>
+                <h3 class="font-bold text-sm text-[#1f160e] mb-3">قالب التخرج الأنيق</h3>
                 <button onclick="selectTemplate('grad1.jpg')" class="w-full bg-[#b58d43] hover:bg-[#9c7634] text-white text-xs font-bold py-2.5 rounded-xl transition shadow-md">
                     اختر هذا القالب
                 </button>
@@ -47,24 +55,39 @@
 
             <!-- القالب الثاني -->
             <div class="template-card p-4 border border-white/40 flex flex-col items-center">
-                <div class="w-full h-72 rounded-xl overflow-hidden bg-slate-900 mb-4 border border-gray-100">
-                    <img src="grad2.jpg" alt="قالب تهنئة نجاح" class="w-full h-full object-cover">
+                <div class="w-full aspect-[9/16] h-[340px] rounded-xl overflow-hidden bg-slate-900/10 mb-4 border border-gray-100 flex items-center justify-center">
+                    <img src="grad2.jpg" alt="قالب التخرج العصري" class="w-full h-full object-contain">
                 </div>
-                <h3 class="font-bold text-sm text-[#1f160e] mb-3">قالب تهنئة نجاح</h3>
+                <h3 class="font-bold text-sm text-[#1f160e] mb-3">قالب قبعات التحرّج الطائرة</h3>
                 <button onclick="selectTemplate('grad2.jpg')" class="w-full bg-[#b58d43] hover:bg-[#9c7634] text-white text-xs font-bold py-2.5 rounded-xl transition shadow-md">
                     اختر هذا القالب
                 </button>
             </div>
 
-                    </div>
+            <!-- القالب الثالث -->
+            <div class="template-card p-4 border border-white/40 flex flex-col items-center">
+                <div class="w-full aspect-[9/16] h-[340px] rounded-xl overflow-hidden bg-slate-900/10 mb-4 border border-gray-100 flex items-center justify-center">
+                    <img src="grad3.jpg" alt="قالب التخرج الملكي" class="w-full h-full object-contain">
+                </div>
+                <h3 class="font-bold text-sm text-[#1f160e] mb-3">قالب التهنئة الذهبية</h3>
+                <button onclick="selectTemplate('grad3.jpg')" class="w-full bg-[#b58d43] hover:bg-[#9c7634] text-white text-xs font-bold py-2.5 rounded-xl transition shadow-md">
+                    اختر هذا القالب
+                </button>
+            </div>
+
+            <!-- ========================================== -->
+            <!--   نهاية قسم إضافة / حذف القوالب بسهولة    -->
+            <!-- ========================================== -->
+
+        </div>
     </div>
 
 
-    <!-- ================== الشاشة الثانية: شاشة التصميم والتعديل (تكون مخفية في البداية) ================== -->
+    <!-- ================== الشاشة الثانية: شاشة التصميم والتعديل ================== -->
     <div id="design-screen" class="w-full max-w-5xl flex flex-col lg:flex-row gap-6 items-center lg:items-stretch justify-center my-auto hidden">
         
         <!-- القسم الأيسر: معاينة بطاقة التخرج مع القالب المختار -->
-        <div class="w-full max-w-[360px] flex flex-col items-center">
+        <div class="w-full max-w-[340px] flex flex-col items-center">
             <div class="preview-card p-3 w-full border border-white/40">
                 <div id="card-container" class="relative w-full rounded-xl overflow-hidden shadow-lg border border-gray-200 bg-slate-900">
                     <svg id="card-svg" viewBox="0 0 640 1136" class="w-full h-auto block" xmlns="http://www.w3.org/2000/svg">
@@ -76,10 +99,7 @@
                             </linearGradient>
                         </defs>
                         
-                        <!-- الصورة ستتغير ديناميكياً هنا بناء على القالب الذي يتم اختياره -->
                         <image id="svg-template-img" href="" width="640" height="1136" x="0" y="0" preserveAspectRatio="xMidYMid meet" crossorigin="anonymous"/>
-                        
-                        <!-- الاسم المكتوب -->
                         <text id="svg-name-target" x="320" y="580" text-anchor="middle" fill="url(#gold-text)" font-size="52" font-weight="900">أمجاد</text>
                     </svg>
                 </div>
@@ -147,7 +167,7 @@
             </p>
 
             <!-- هنا ستظهر الصورة المدمجة والنهائية كملف صورة عادي -->
-            <div class="relative w-full max-w-[290px] mx-auto rounded-2xl overflow-hidden shadow-lg border border-gray-200 mb-6">
+            <div class="relative w-full max-w-[280px] mx-auto rounded-2xl overflow-hidden shadow-lg border border-gray-200 mb-6">
                 <img id="final-card-img" src="" alt="بطاقة التخرج المخصصة" class="w-full h-auto block select-none">
             </div>
 
@@ -156,9 +176,6 @@
                 <button id="btn-back-to-design" class="w-full bg-slate-800 hover:bg-slate-900 text-white text-xs font-bold py-3 rounded-xl transition">
                     ← العودة وتعديل الاسم
                 </button>
-                <p class="text-[10px] text-gray-400 mt-2">
-                    ملاحظة: إذا لم يظهر خيار الحفظ عند الضغط المطول، يمكنك التقاط شاشة (Screenshot) للبطاقة مباشرة.
-                </p>
             </div>
         </div>
     </div>
@@ -184,48 +201,39 @@
 
         let currentSelectedTemplatePath = '';
 
-        // 1. دالة اختيار قالب من المعرض والانتقال لشاشة التصميم
         function selectTemplate(imgName) {
             currentSelectedTemplatePath = imgName;
             svgTemplateImg.setAttribute('href', imgName);
-            
-            // إظهار شاشة التصميم وإخفاء معرض الصور
             galleryScreen.classList.add('hidden');
             designScreen.classList.remove('hidden');
         }
 
-        // العودة لمعرض اختيار القوالب
         btnBackToGallery.addEventListener('click', () => {
             designScreen.classList.add('hidden');
             galleryScreen.classList.remove('hidden');
         });
 
-        // تحديث الاسم بشكل حي عند الإدخال
         nameInput.addEventListener('input', () => {
             svgNameTarget.textContent = nameInput.value.trim() || "أمجاد";
         });
 
-        // تعديل موقع الاسم
         positionY.addEventListener('input', (e) => {
             const yValue = e.target.value;
             svgNameTarget.setAttribute('y', yValue);
             valY.textContent = yValue;
         });
 
-        // تعديل حجم الخط
         fontSize.addEventListener('input', (e) => {
             const sizeValue = e.target.value;
             svgNameTarget.setAttribute('font-size', sizeValue);
             valSize.textContent = sizeValue + 'px';
         });
 
-        // العودة من صفحة الحفظ لشاشة التعديل
         btnBackToDesign.addEventListener('click', () => {
             saveScreen.classList.add('hidden');
             designScreen.classList.remove('hidden');
         });
 
-        // 2. معالجة وحفظ البطاقة النهائية والانتقال لشاشة الحفظ
         btnGenerate.addEventListener('click', () => {
             const canvas = document.createElement('canvas');
             canvas.width = 640;
@@ -233,14 +241,12 @@
             const context = canvas.getContext('2d');
 
             const bgImg = new Image();
-            bgImg.crossOrigin = 'anonymous'; // لمنع مشاكل CORS في المتصفح
+            bgImg.crossOrigin = 'anonymous'; 
             bgImg.src = currentSelectedTemplatePath; 
 
             bgImg.onload = () => {
-                // رسم خلفية القالب المختار بدقة كاملة
                 context.drawImage(bgImg, 0, 0, 640, 1136);
 
-                // كتابة الاسم بالتأثير الذهبي المخصص
                 const size = fontSize.value;
                 const y = positionY.value;
                 const text = nameInput.value.trim() || "أمجاد";
@@ -256,11 +262,9 @@
                 context.fillStyle = goldGradient;
                 context.fillText(text, 320, y);
 
-                // استخراج الصورة النهائية وحقنها كصورة عادية في الشاشة الثالثة
                 const renderedDataUrl = canvas.toDataURL('image/png');
                 finalCardImg.src = renderedDataUrl;
 
-                // التنقل بسلاسة لشاشة الحفظ
                 designScreen.classList.add('hidden');
                 saveScreen.classList.remove('hidden');
             };
