@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>صانع بطاقات التخرج</title>
+    <title>صانع بطاقات التخرج الذكي</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap');
@@ -11,19 +11,70 @@
             font-family: 'Cairo', sans-serif;
             background-color: #e6ded4; 
         }
-        .preview-card {
+        .preview-card, .template-card {
             background: #fffdf9;
             border-radius: 24px;
             box-shadow: 0 20px 40px rgba(0,0,0,0.06);
+            transition: all 0.3s ease;
+        }
+        .template-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 30px 50px rgba(181, 141, 67, 0.15);
         }
     </style>
 </head>
 <body class="min-h-screen flex flex-col items-center justify-start p-4 md:p-8">
 
-    <!-- ================== الشاشة الأولى: شاشة التصميم والتعديل ================== -->
-    <div id="design-screen" class="w-full max-w-5xl flex flex-col lg:flex-row gap-6 items-center lg:items-stretch justify-center my-auto">
+    <!-- ================== الشاشة الأولى: معرض اختيار القوالب ================== -->
+    <div id="gallery-screen" class="w-full max-w-4xl my-auto text-center">
+        <span class="text-3xl">🎓</span>
+        <h1 class="text-3xl md:text-4xl font-black text-[#1f160e] mt-2 mb-2">اختر قالب التخرج المفضل</h1>
+        <p class="text-xs md:text-sm text-gray-600 mb-8 max-w-md mx-auto leading-relaxed">
+            مجموعة متميزة من بطاقات التخرج الجاهزة، اختر التصميم الذي يعجبك لتبدأ في كتابة اسم الخريج عليه فوراً.
+        </p>
+
+        <!-- شبكة القوالب المصغرة -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 px-4">
+            <!-- القالب الأول -->
+            <div class="template-card p-4 border border-white/40 flex flex-col items-center">
+                <div class="w-full h-72 rounded-xl overflow-hidden bg-slate-900 mb-4 border border-gray-100">
+                    <img src="grad1.jpg" alt="قالب التخرج الكلاسيكي" class="w-full h-full object-cover">
+                </div>
+                <h3 class="font-bold text-sm text-[#1f160e] mb-3">قالب التخرج الأنيق</h3>
+                <button onclick="selectTemplate('grad1.jpg')" class="w-full bg-[#b58d43] hover:bg-[#9c7634] text-white text-xs font-bold py-2.5 rounded-xl transition shadow-md">
+                    اختر هذا القالب
+                </button>
+            </div>
+
+            <!-- القالب الثاني -->
+            <div class="template-card p-4 border border-white/40 flex flex-col items-center">
+                <div class="w-full h-72 rounded-xl overflow-hidden bg-slate-900 mb-4 border border-gray-100">
+                    <img src="grad2.jpg" alt="قالب التخرج العصري" class="w-full h-full object-cover">
+                </div>
+                <h3 class="font-bold text-sm text-[#1f160e] mb-3">قالب قبعات التحرّج الطائرة</h3>
+                <button onclick="selectTemplate('grad2.jpg')" class="w-full bg-[#b58d43] hover:bg-[#9c7634] text-white text-xs font-bold py-2.5 rounded-xl transition shadow-md">
+                    اختر هذا القالب
+                </button>
+            </div>
+
+            <!-- القالب الثالث -->
+            <div class="template-card p-4 border border-white/40 flex flex-col items-center">
+                <div class="w-full h-72 rounded-xl overflow-hidden bg-slate-900 mb-4 border border-gray-100">
+                    <img src="grad3.jpg" alt="قالب التخرج الملكي" class="w-full h-full object-cover">
+                </div>
+                <h3 class="font-bold text-sm text-[#1f160e] mb-3">قالب التهنئة الذهبية</h3>
+                <button onclick="selectTemplate('grad3.jpg')" class="w-full bg-[#b58d43] hover:bg-[#9c7634] text-white text-xs font-bold py-2.5 rounded-xl transition shadow-md">
+                    اختر هذا القالب
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ================== الشاشة الثانية: شاشة التصميم والتعديل (تكون مخفية في البداية) ================== -->
+    <div id="design-screen" class="w-full max-w-5xl flex flex-col lg:flex-row gap-6 items-center lg:items-stretch justify-center my-auto hidden">
         
-        <!-- القسم الأيسر: معاينة بطاقة التخرج بالأبعاد الحقيقية -->
+        <!-- القسم الأيسر: معاينة بطاقة التخرج مع القالب المختار -->
         <div class="w-full max-w-[360px] flex flex-col items-center">
             <div class="preview-card p-3 w-full border border-white/40">
                 <div id="card-container" class="relative w-full rounded-xl overflow-hidden shadow-lg border border-gray-200 bg-slate-900">
@@ -36,8 +87,8 @@
                             </linearGradient>
                         </defs>
                         
-                        <!-- استدعاء الصورة المرفوعة في حسابك GitHub مباشرة -->
-                        <image href="grad.jpg" width="640" height="1136" x="0" y="0" preserveAspectRatio="xMidYMid meet" crossorigin="anonymous"/>
+                        <!-- الصورة ستتغير ديناميكياً هنا بناء على القالب الذي يتم اختياره -->
+                        <image id="svg-template-img" href="" width="640" height="1136" x="0" y="0" preserveAspectRatio="xMidYMid meet" crossorigin="anonymous"/>
                         
                         <!-- الاسم المكتوب -->
                         <text id="svg-name-target" x="320" y="580" text-anchor="middle" fill="url(#gold-text)" font-size="52" font-weight="900">أمجاد</text>
@@ -49,14 +100,16 @@
         <!-- القسم الأيمن: لوحة التحكم بالتصميم -->
         <div class="w-full max-w-[400px] bg-[#fffdf9]/95 backdrop-blur-md rounded-3xl p-6 shadow-xl border border-white/60 flex flex-col justify-between">
             <div>
-                <span class="text-xs font-bold text-amber-700 bg-amber-100 px-3 py-1 rounded-full w-max block mb-3">أداة التخصيص الذكية</span>
+                <button id="btn-back-to-gallery" class="text-xs font-bold text-amber-700 bg-amber-100 hover:bg-amber-200 px-3 py-1.5 rounded-full w-max block mb-4 transition">
+                    ← العودة لاختيار قالب آخر
+                </button>
                 
                 <h1 class="text-2xl font-black text-[#1f160e] leading-tight mb-2">
                     اكتب الاسم واضبط مكانه
                 </h1>
                 
                 <p class="text-xs text-gray-600 mb-4 leading-relaxed">
-                    اكتب الاسم بالأسفل، واستخدم شريط التحكم لرفعه أو خفضه ليتناسب مع موقع البطاقة الأصلي تماماً قبل الحفظ.
+                    اكتب اسم الخريج بالأسفل، ثم استخدم شريط التحكم لرفعه أو خفضه ليكون متطابقاً مع الفراغ المخصص له في هذا القالب.
                 </p>
                 
                 <!-- حقل الإدخال -->
@@ -71,7 +124,7 @@
                         <label for="position-y">موقع الاسم (لأعلى ولأسفل)</label>
                         <span id="val-y" class="text-amber-800">580</span>
                     </div>
-                    <input type="range" id="position-y" min="200" max="1100" value="580" class="w-full accent-amber-700">
+                    <input type="range" id="position-y" min="100" max="1100" value="580" class="w-full accent-amber-700">
                 </div>
 
                 <!-- التحكم في حجم الخط -->
@@ -80,7 +133,7 @@
                         <label for="font-size">حجم خط الاسم</label>
                         <span id="val-size" class="text-amber-800">52px</span>
                     </div>
-                    <input type="range" id="font-size" min="25" max="100" value="52" class="w-full accent-amber-700">
+                    <input type="range" id="font-size" min="20" max="110" value="52" class="w-full accent-amber-700">
                 </div>
             </div>
 
@@ -94,7 +147,7 @@
     </div>
 
 
-    <!-- ================== الشاشة الثانية: شاشة الحفظ الفوري (تظهر بعد التجهيز) ================== -->
+    <!-- ================== الشاشة الثالثة: شاشة الحفظ الفوري ================== -->
     <div id="save-screen" class="w-full max-w-md flex flex-col items-center justify-center my-auto hidden">
         <div class="bg-[#fffdf9] rounded-3xl p-6 shadow-2xl border border-white/60 w-full text-center">
             
@@ -104,14 +157,14 @@
                 📱 اضغط مطولاً على الصورة بالأسفل لحفظها في جهازك
             </p>
 
-            <!-- هنا ستظهر الصورة المدمجة والنهائية كملف صورة عادي يدعم الحفظ اليدوي المباشر للجوال -->
+            <!-- هنا ستظهر الصورة المدمجة والنهائية كملف صورة عادي -->
             <div class="relative w-full max-w-[290px] mx-auto rounded-2xl overflow-hidden shadow-lg border border-gray-200 mb-6">
                 <img id="final-card-img" src="" alt="بطاقة التخرج المخصصة" class="w-full h-auto block select-none">
             </div>
 
             <!-- أزرار التحكم بالرجوع -->
             <div class="space-y-2">
-                <button id="btn-back" class="w-full bg-slate-800 hover:bg-slate-900 text-white text-xs font-bold py-3 rounded-xl transition">
+                <button id="btn-back-to-design" class="w-full bg-slate-800 hover:bg-slate-900 text-white text-xs font-bold py-3 rounded-xl transition">
                     ← العودة وتعديل الاسم
                 </button>
                 <p class="text-[10px] text-gray-400 mt-2">
@@ -121,8 +174,13 @@
         </div>
     </div>
 
-    <!-- جافا سكريبت التفاعلية لإدارة الصفحات ومعالجة الصورة -->
+    <!-- جافا سكريبت التفاعلية لإدارة الصفحات والتنقل بينها -->
     <script>
+        const galleryScreen = document.getElementById('gallery-screen');
+        const designScreen = document.getElementById('design-screen');
+        const saveScreen = document.getElementById('save-screen');
+        
+        const svgTemplateImg = document.getElementById('svg-template-img');
         const nameInput = document.getElementById('name-input');
         const svgNameTarget = document.getElementById('svg-name-target');
         const positionY = document.getElementById('position-y');
@@ -130,57 +188,70 @@
         const valY = document.getElementById('val-y');
         const valSize = document.getElementById('val-size');
         
-        // شاشات العرض
-        const designScreen = document.getElementById('design-screen');
-        const saveScreen = document.getElementById('save-screen');
-        
-        // الأزرار وصورة الحفظ
+        const btnBackToGallery = document.getElementById('btn-back-to-gallery');
         const btnGenerate = document.getElementById('btn-generate');
-        const btnBack = document.getElementById('btn-back');
+        const btnBackToDesign = document.getElementById('btn-back-to-design');
         const finalCardImg = document.getElementById('final-card-img');
 
-        // تحديث حي ومستمر أثناء الكتابة والتعديل
+        let currentSelectedTemplatePath = '';
+
+        // 1. دالة اختيار قالب من المعرض والانتقال لشاشة التصميم
+        function selectTemplate(imgName) {
+            currentSelectedTemplatePath = imgName;
+            svgTemplateImg.setAttribute('href', imgName);
+            
+            // إظهار شاشة التصميم وإخفاء معرض الصور
+            galleryScreen.classList.add('hidden');
+            designScreen.classList.remove('hidden');
+        }
+
+        // العودة لمعرض اختيار القوالب
+        btnBackToGallery.addEventListener('click', () => {
+            designScreen.classList.add('hidden');
+            galleryScreen.classList.remove('hidden');
+        });
+
+        // تحديث الاسم بشكل حي عند الإدخال
         nameInput.addEventListener('input', () => {
             svgNameTarget.textContent = nameInput.value.trim() || "أمجاد";
         });
 
+        // تعديل موقع الاسم
         positionY.addEventListener('input', (e) => {
             const yValue = e.target.value;
             svgNameTarget.setAttribute('y', yValue);
             valY.textContent = yValue;
         });
 
+        // تعديل حجم الخط
         fontSize.addEventListener('input', (e) => {
             const sizeValue = e.target.value;
             svgNameTarget.setAttribute('font-size', sizeValue);
             valSize.textContent = sizeValue + 'px';
         });
 
-        // العودة للشاشة الأولى للتعديل
-        btnBack.addEventListener('click', () => {
+        // العودة من صفحة الحفظ لشاشة التعديل
+        btnBackToDesign.addEventListener('click', () => {
             saveScreen.classList.add('hidden');
             designScreen.classList.remove('hidden');
         });
 
-        // الانتقال للشاشة الثانية وتجهيز الصورة المسطحة للحفظ
+        // 2. معالجة وحفظ البطاقة النهائية والانتقال لشاشة الحفظ
         btnGenerate.addEventListener('click', () => {
-            // استخدام Canvas مدمج لمعالجة الصورة والاسم محلياً بدون تدمير دقة الحماية
             const canvas = document.createElement('canvas');
             canvas.width = 640;
             canvas.height = 1136;
             const context = canvas.getContext('2d');
 
             const bgImg = new Image();
-            bgImg.crossOrigin = 'anonymous'; // لتفادي مشاكل الأمان
-            
-            // تحميل الصورة الأصلية المرفوعة في مجلدك بـ GitHub
-            bgImg.src = 'grad.jpg'; 
+            bgImg.crossOrigin = 'anonymous'; // لمنع مشاكل CORS في المتصفح
+            bgImg.src = currentSelectedTemplatePath; 
 
             bgImg.onload = () => {
-                // 1. رسم الصورة الأصلية كخلفية للـ Canvas بدقتها الكاملة
+                // رسم خلفية القالب المختار بدقة كاملة
                 context.drawImage(bgImg, 0, 0, 640, 1136);
 
-                // 2. تصميم الخط وتأثير التدرج الذهبي المتناسق للاسم
+                // كتابة الاسم بالتأثير الذهبي المخصص
                 const size = fontSize.value;
                 const y = positionY.value;
                 const text = nameInput.value.trim() || "أمجاد";
@@ -188,30 +259,25 @@
                 context.font = `900 ${size}px 'Cairo', sans-serif`;
                 context.textAlign = 'center';
                 
-                // تدرج لوني ذهبي ممتاز مطابق للبطاقة
                 const goldGradient = context.createLinearGradient(0, 0, 640, 0);
                 goldGradient.addColorStop(0, '#ffe8b3');
                 goldGradient.addColorStop(0.5, '#dcb36c');
                 goldGradient.addColorStop(1, '#b58d43');
                 
                 context.fillStyle = goldGradient;
-                
-                // 3. كتابة الاسم فوق الـ Canvas بالاحداثيات المحددة
                 context.fillText(text, 320, y);
 
-                // 4. تحويل الناتج إلى ملف صورة مسطح بصيغة PNG
+                // استخراج الصورة النهائية وحقنها كصورة عادية في الشاشة الثالثة
                 const renderedDataUrl = canvas.toDataURL('image/png');
-                
-                // 5. حقن الصورة في عنصر الـ img الخاص بصفحة الحفظ
                 finalCardImg.src = renderedDataUrl;
 
-                // 6. التحويل للشاشة الثانية فوراً وبسلاسة
+                // التنقل بسلاسة لشاشة الحفظ
                 designScreen.classList.add('hidden');
                 saveScreen.classList.remove('hidden');
             };
 
             bgImg.onerror = () => {
-                alert('عذراً، لم نتمكن من العثور على ملف الصورة المسمى grad.jpg في مجلد GitHub الخاص بك. يرجى التأكد من رفعه بنفس الاسم تماماً بجانب كود الصفحة.');
+                alert(`عذراً، تعذر العثور على ملف الصورة باسم ${currentSelectedTemplatePath} في مجلد المشروع. يرجى التأكد من رفع جميع القوالب في GitHub.`);
             };
         });
     </script>
