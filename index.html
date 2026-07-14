@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>صانع بطاقات التخرج الذكي</title>
+    <title>صانع بطاقات التهنئة</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap');
@@ -27,9 +27,9 @@
 
     <!-- ================== الشاشة الأولى: معرض اختيار القوالب ================== -->
     <div id="gallery-screen" class="w-full max-w-4xl my-auto text-center py-6">
-        <h1 class="text-3xl md:text-4xl font-black text-[#1f160e] mt-2 mb-2">اختر قالب التخرج المفضل</h1>
+        <h1 class="text-3xl md:text-4xl font-black text-[#1f160e] mt-2 mb-2">اختر قالب التهنئة</h1>
         <p class="text-xs md:text-sm text-gray-600 mb-8 max-w-md mx-auto leading-relaxed">
-            مجموعة متميزة من بطاقات التخرج الجاهزة، اختر التصميم الذي يعجبك لتبدأ في كتابة اسم الخريج عليه فوراً.
+            مجموعة متميزة من بطاقات التهنئة الجاهزة، اختر التصميم الذي يعجبك لتبدأ في كتابة الاسم.
         </p>
 
         <!-- شبكة القوالب المصغرة -->
@@ -90,7 +90,7 @@
                         </defs>
                         
                         <image id="svg-template-img" href="" width="640" height="1136" x="0" y="0" preserveAspectRatio="xMidYMid meet" crossorigin="anonymous"/>
-                        <text id="svg-name-target" x="320" y="580" text-anchor="middle" fill="url(#gold-text)" font-size="52" font-weight="900">أمجاد</text>
+                        <text id="svg-name-target" x="320" y="580" text-anchor="middle" fill="url(#gold-text)" font-size="52" font-weight="900">اكتب الاسم هنا</text>
                     </svg>
                 </div>
             </div>
@@ -239,7 +239,7 @@
 
                 const size = fontSize.value;
                 const y = positionY.value;
-                const text = nameInput.value.trim() || "أمجاد";
+                const text = nameInput.value.trim() || "اكتب الاسم هنا";
 
                 context.font = `900 ${size}px 'Cairo', sans-serif`;
                 context.textAlign = 'center';
